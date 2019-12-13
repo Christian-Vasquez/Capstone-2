@@ -56,7 +56,7 @@ public class ProductController {
             product.setId(id);
         }
         if (id != product.getId()) {
-            throw new IllegalArgumentException("Product ID on path must match the ID in the Task object");
+            throw new IllegalArgumentException("Product ID on path must match the ID in the Product object");
         }
 
         productServiceLayer.updateProduct(product);
