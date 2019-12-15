@@ -18,5 +18,4 @@ public interface InvoiceDao {
 
     public List<Invoice> getInvoicesByCustomerId(int customerId);
 
-
 }

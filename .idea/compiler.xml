@@ -6,17 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="invoice-service" />
         <module name="product-service" />
         <module name="customer-service" />
         <module name="eureka-service-registry" />
-        <module name="level-up-service" />
         <module name="cloud-config-service" />
+        <module name="level-up-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="cloud-config-service" target="1.8" />
       <module name="customer-service" target="1.8" />
       <module name="eureka-service-registry" target="1.8" />
+      <module name="invoice-service" target="1.8" />
       <module name="level-up-service" target="1.8" />
       <module name="product-service" target="1.8" />
     </bytecodeTargetLevel>
@@ -26,6 +28,7 @@
       <module name="cloud-config-service" options="-parameters" />
       <module name="customer-service" options="-parameters" />
       <module name="eureka-service-registry" options="-parameters" />
+      <module name="invoice-service" options="-parameters" />
       <module name="level-up-service" options="-parameters" />
       <module name="product-service" options="-parameters" />
     </option>
