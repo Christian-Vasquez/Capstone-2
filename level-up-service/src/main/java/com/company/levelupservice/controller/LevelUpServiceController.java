@@ -3,12 +3,14 @@ package com.company.levelupservice.controller;
 import com.company.levelupservice.model.LevelUp;
 import com.company.levelupservice.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RefreshScope
 @RequestMapping("/level-up")
 public class LevelUpServiceController {
 

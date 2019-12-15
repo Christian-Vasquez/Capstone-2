@@ -20,6 +20,6 @@ public interface LevelUpDao {
 
     public void addPointsByCustomerId(int points, int customerId);
 
-
+//    public int getPointsByCustomerId(int customerId);
 
 }

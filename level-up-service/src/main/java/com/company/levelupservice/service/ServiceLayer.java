@@ -1,6 +1,7 @@
 package com.company.levelupservice.service;
 
 import com.company.levelupservice.dao.LevelUpDao;
+import com.company.levelupservice.exception.NotFoundException;
 import com.company.levelupservice.model.LevelUp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,11 @@ public class ServiceLayer {
     }
 
     public LevelUp findLevelUpByLvlId(int id) {
-        return levelUpDao.getLevelUpByLvlUpId(id);
+        LevelUp levelUp = levelUpDao.getLevelUpByLvlUpId(id);
+        if (levelUp == null) {
+            throw new NotFoundException("no levelup with that id");
+        }
+        return levelUp;
     }
 
     public void updateLevelUp(LevelUp levelUp) {
@@ -38,7 +43,11 @@ public class ServiceLayer {
     }
 
     public LevelUp getLevelUpByCustomerId(int customerId) {
-        return levelUpDao.getLevelUpByCustomerId(customerId);
+        LevelUp levelUp = levelUpDao.getLevelUpByCustomerId(customerId);
+        if (levelUp == null) {
+            throw new NotFoundException("no levelup with that id");
+        }
+        return levelUp;
     }
 
     public void addPointsByCustomerId(int points, int customerId) {

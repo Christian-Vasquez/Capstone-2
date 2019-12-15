@@ -82,11 +82,17 @@ public class LevelUpDaoImplTests {
         assertEquals(levelUps, lvlUpDao.getAllLevelUps());
     }
 
+
     @Test
     public void shouldReturnLevelUpByCustomerId() {
         levelUp = lvlUpDao.createLevelUp(levelUp);
 
         assertEquals(levelUp, lvlUpDao.getLevelUpByCustomerId(1));
+    }
+
+    @Test
+    public void shouldReturnNullIfCustomerIdNotFound() {
+        assertNull(lvlUpDao.getLevelUpByCustomerId(100));
     }
 
     @Test

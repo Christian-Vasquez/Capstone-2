@@ -1,6 +1,5 @@
 package com.company.levelupservice.dao;
 
-import com.company.levelupservice.exception.NotFoundException;
 import com.company.levelupservice.model.LevelUp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -40,6 +39,9 @@ public class LevelUpDaoImpl implements LevelUpDao {
     private static final String UPDATE_POINTS_SQL =
             "update level_up set points = ? where customer_id = ?";
 
+    private static final String GET_POINTS_SQL =
+            "select points from level_up where customer_id = ?";
+
 
     @Autowired
     public LevelUpDaoImpl(JdbcTemplate jdbcTemplate) {
@@ -69,7 +71,8 @@ public class LevelUpDaoImpl implements LevelUpDao {
         try {
             return jdbcTemplate.queryForObject(SELECT_LEVEL_UP_SQL, this::mapRowToLevelUp, id);
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException("no levelup with that id");
+//            throw new NotFoundException("no levelup with that id");
+            return null;
         }
     }
 
@@ -99,9 +102,19 @@ public class LevelUpDaoImpl implements LevelUpDao {
         try {
             return jdbcTemplate.queryForObject(GET_LEVEL_UP_BY_CUSTOMER, this::mapRowToLevelUp, customerId);
         } catch (EmptyResultDataAccessException e) {
-            throw new NotFoundException("no levelup with that id");
+//            throw new NotFoundException("no levelup with that id");
+            return null;
         }
     }
+
+//    @Override
+//    public int getPointsByCustomerId(int customerId) {
+//        try {
+//            return jdbcTemplate.queryForObject(GET_POINTS_SQL, customerId);
+//        } catch (EmptyResultDataAccessException e) {
+//            throw new NotFoundException("no levelup with that id");
+//        }
+//    }
 
     @Override
     public void addPointsByCustomerId(int points, int customerId) {
