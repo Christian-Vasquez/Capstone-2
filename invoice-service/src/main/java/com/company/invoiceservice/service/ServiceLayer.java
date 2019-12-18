@@ -28,6 +28,7 @@ public class ServiceLayer {
 
     @Transactional
     public InvoiceViewModel saveInvoiceViewModel(@Valid InvoiceViewModel invoiceViewModel) {
+        System.out.println(invoiceViewModel);
         Invoice invoice = new Invoice();
         invoice.setCustomerId(invoiceViewModel.getCustomerId());
         invoice.setPurchaseDate(invoiceViewModel.getPurchaseDate());
@@ -37,10 +38,14 @@ public class ServiceLayer {
 
         List<InvoiceItem> invoiceItems = invoiceViewModel.getInvoiceItemList();
 
-        invoiceItems.stream().forEach(invoiceItem -> {
-            invoiceItem.setInvoiceId(invoiceViewModel.getInvoiceId());
-            itemDao.createInvoiceItem(invoiceItem);
-        });
+//        invoiceItems.stream().forEach(invoiceItem -> {
+//            invoiceItem.setInvoiceId(invoiceViewModel.getInvoiceId());
+//            itemDao.createInvoiceItem(invoiceItem);
+//        });
+        for (InvoiceItem item : invoiceItems) {
+            item.setInvoiceId(invoice.getInvoiceId());
+            itemDao.createInvoiceItem(item);
+        }
 
         invoiceItems = itemDao.getInvoiceItemsByInvoiceId(invoiceViewModel.getInvoiceId());
         invoiceViewModel.setInvoiceItemList(invoiceItems);

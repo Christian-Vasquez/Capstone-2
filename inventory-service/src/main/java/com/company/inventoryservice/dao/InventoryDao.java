@@ -18,6 +18,6 @@ public interface InventoryDao {
 
     public Inventory getProductInventoryByProductId(int productId);
 
-
+//    public void updateInventoryByProductId(int productId);
 
 }

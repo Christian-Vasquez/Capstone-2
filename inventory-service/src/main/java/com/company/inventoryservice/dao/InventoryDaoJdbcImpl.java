@@ -94,6 +94,11 @@ public class InventoryDaoJdbcImpl implements InventoryDao {
         }
     }
 
+//    @Override
+//    public void updateInventoryByProductId(int productId) {
+//        jdbcTemplate.update(UPDATE_INVENTORY_By_PRODUCT_SQL, productId)
+//    }
+
     private Inventory mapRowToInventory(ResultSet rs, int rowNum) throws SQLException {
         Inventory inventory = new Inventory();
         inventory.setInventoryId(rs.getInt("inventory_id"));

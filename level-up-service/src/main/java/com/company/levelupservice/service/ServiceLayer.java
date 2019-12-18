@@ -19,6 +19,10 @@ public class ServiceLayer {
     }
 
     public LevelUp saveLevelUp(LevelUp levelUp) {
+        if (levelUpDao.getLevelUpByCustomerId(levelUp.getCustomerId()) != null) {
+            levelUpDao.addPointsByCustomerId(levelUp.getPoints(), levelUp.getCustomerId());
+            return levelUpDao.getLevelUpByCustomerId(levelUp.getCustomerId());
+        }
         return levelUpDao.createLevelUp(levelUp);
     }
 
