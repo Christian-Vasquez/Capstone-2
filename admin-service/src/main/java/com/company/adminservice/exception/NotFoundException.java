@@ -1,4 +1,13 @@
 package com.company.adminservice.exception;
 
-public class NotFoundException {
+public class NotFoundException  extends RuntimeException{
+
+    public NotFoundException() {
+        super();
+    }
+
+    public NotFoundException(String msg) {
+        super(msg);
+    }
+
 }
