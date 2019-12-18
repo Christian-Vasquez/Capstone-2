@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  title: Stwitter Service
+  description:
+    Stwitter (Simple Switter) is a stripped down social media service. The project was started as a proof of concept but was later modified and completed for use on the company intranet.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8889'
+    description: Local dev server
+paths:
+# 
+  /posts:
+    post:
+      summary: Creates a new post entry with the given information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          description: A Post View Model object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete Task information. Some required fields are missing.
+          
+  /posts/{id}:
+    get:
+      summary: Retrieves the entry for the post with the given ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the Post you would like to retrieve.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: Post object matching given ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '422':
+          description: No post in the db matches the id supplied in the path variable. 
+          
+  /posts/user/{poster_name}:
+    get:
+      summary: Retrieves the list of games based on given studio.
+      parameters:
+        - name: poster_name
+          in: path
+          required: true
+          description: name of a user whose posts you would like to retrieve
+          schema:
+            type: string
+            minimum: 1
+      responses:
+        '200':
+          description: List of post objects by the post author.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '422':
+          description: no posts found by the given author.
+          
+          
+
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        postContent:
+          type: string
+        postDate:
+          type: string
+        posterName:
+          type: string
+        comments:
+# need to change the type to array
+          type: string
+      required:
+        - postContent
+        - postDate
+        - posterName
+    
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        postId:
+          type: integer
+          format: int32
+        commenterName:
+          type: string
+        commentDate:
+          type: string
+        commentContent:
+          type: string
+      required:
+        - postId
+        - commenterName
+        - commentDate
+        - commentContent
